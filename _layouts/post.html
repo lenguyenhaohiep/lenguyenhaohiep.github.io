@@ -20,15 +20,28 @@ layout: default
   </div>
 
   <div class="post-categories">
+    <p>
     {% if post %}
       {% assign categories = post.categories %}
     {% else %}
       {% assign categories = page.categories %}
     {% endif %}
     {% for category in categories %}
-    <a href="{{site.baseurl}}/categories/#{{category|slugize}}">{{category}}</a>
+    Categories: <a href="{{site.baseurl}}/categories/#{{category|slugize}}">{{category}}</a>
     {% unless forloop.last %}&nbsp;{% endunless %}
     {% endfor %}
+    </p>
+    <p>
+    {% if post %}
+      {% assign tags = post.tags %}
+    {% else %}
+      {% assign tags = page.tags %}
+    {% endif %}
+    Tags: 
+    {% for tag in tags %}
+    <a href="{{site.baseurl}}/archive/tag/{{tag|slugize|split:","|first}}">{{tag}}</a>
+    {% endfor %}
+    </p>
   </div>
 
   {%- if site.disqus.shortname -%}
