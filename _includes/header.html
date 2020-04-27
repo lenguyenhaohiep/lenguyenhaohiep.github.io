@@ -1,9 +1,9 @@
-<header class="site-header" role="banner">
+<header class="site-header" role="banner" style="border-top:0; background-color: #159957;background-image: linear-gradient(120deg, #155799, #159957);color: #fff;">
 
   <div class="wrapper">
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
-    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+    <a class="site-title" style="color:#fff" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
 
     {%- if page_paths -%}
       <nav class="site-nav">
