@@ -17,6 +17,16 @@
         </label>
         <div class="trigger">
           <span>Developer, traveller and night owl</span>
+          <a class="svg-link" href="https://github.com/{{ site.github_username| cgi_escape | escape }}">
+            <svg class="svg-icon" style="fill:white; padding-left:10px">
+              <use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}"></use>
+            </svg>
+          </a>
+          <a class="svg-link" href="https://www.linkedin.com/in/{{ site.linkedin_username| cgi_escape | escape }}">
+            <svg class="svg-icon" style="fill:white">
+              <use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use>
+            </svg>
+          </a>
         </div>
       </nav>
     {%- endif -%}
