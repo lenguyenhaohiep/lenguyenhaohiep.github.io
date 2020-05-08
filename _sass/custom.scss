@@ -1,0 +1,64 @@
+body {
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 14px;
+}
+
+.post-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+pre, code{
+  tab-size: 4;
+  background: #f4f4f4;
+}
+
+.highlighter-rouge .highlight {
+    background: #f4f4f4;
+}
+
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 23%;
+  float: left;
+  height: 500px;
+  margin: 1%;
+  border-radius: 5px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-container {
+  padding: 2px 16px;
+  height: 390px;
+}
+
+.card-title {
+  padding: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  min-height: 43px;
+  font-weight: bold;
+  text-align: center;
+}
+.card-footer {
+  position: relative;
+  bottom: 0;
+}
+
+.pagination {
+  width: 100%;
+  display: inline-block;
+}
+.next-page {
+  float: right;
+  width: 100px;
+}
+
+.previous-page {
+  width: 100px;
+  float: left;
+}

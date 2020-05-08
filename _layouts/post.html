@@ -31,17 +31,19 @@ layout: default
     {% unless forloop.last %}&nbsp;{% endunless %}
     {% endfor %}
     </p>
+    <!--
     <p>
     {% if post %}
       {% assign tags = post.tags %}
     {% else %}
       {% assign tags = page.tags %}
     {% endif %}
-    Tags: 
+    Tags:
     {% for tag in tags %}
     <a href="{{site.baseurl}}/archive/tag/{{tag|slugize|split:","|first}}">{{tag}}</a>
     {% endfor %}
     </p>
+    !-->
   </div>
 
   {%- if site.disqus.shortname -%}
