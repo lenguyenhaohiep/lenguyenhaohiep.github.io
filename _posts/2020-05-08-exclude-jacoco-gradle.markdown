@@ -36,7 +36,8 @@ jacocoTestReport {
 			)
 		})
 	}
-}```
+}
+```
 
 When running tests with JUnit, it will create a test report in binary format and Jacoco will generate a readable report (html, xml).
 
