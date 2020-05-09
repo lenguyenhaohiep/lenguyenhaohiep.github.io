@@ -3,7 +3,23 @@ layout: default
 permalink: /categories/
 title: Categories
 ---
-<div id="archives">
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<div class="col">
+  <figure class="highcharts-figure">
+      <div id="category-container"></div>
+  </figure>
+  <center class="highcharts-description">
+    Click on each category to scroll into its posts.
+  </center>
+</div>
+
+<div class="col">
 {% for category in site.categories %}
  <div class="archive-group">
    {% capture category_name %}{{ category | first }}{% endcapture %}
@@ -20,3 +36,38 @@ title: Categories
  </div>
 {% endfor %}
 </div>
+
+
+<script type="text/javascript">
+  var data = [];
+  {% for category in site.categories %}
+     {% capture category_name %}{{ category | first }}{% endcapture %}
+     data.push({
+       name: "{{ category_name | strip }}",
+       weight: {{ site.categories[category_name] | size }},
+     });
+  {% endfor %}
+
+  Highcharts.chart('category-container', {
+      plotOptions: {
+          series: {
+              cursor: 'pointer',
+              point: {
+                  events: {
+                      click: function (event) {
+                        document.getElementById("#"+event.point.name).scrollIntoView()
+                      }
+                  }
+              }
+          }
+      },
+      series: [{
+          type: 'wordcloud',
+          data: data,
+          name: '#posts'
+      }],
+      title: {
+          text: 'Post Categories'
+      }
+  });
+</script>
