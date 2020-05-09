@@ -2,8 +2,7 @@
 layout: post
 title:  "Modify Spark Job’s dependencies folder"
 date:   2016-08-07 00:24:30 -0500
-categories: Tech
-tags: english spark
+categories: Spark
 ---
 
 By default, Spark uses the folder `/root/.ivy2/` to store extra dependencies. When spark is running, you can see

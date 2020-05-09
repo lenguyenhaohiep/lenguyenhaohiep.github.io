@@ -20,7 +20,6 @@ pre, code{
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
   width: 23%;
   float: left;
   height: 500px;
@@ -35,6 +34,7 @@ pre, code{
 .card-container {
   padding: 2px 16px;
   height: 390px;
+  overflow: hidden;
 }
 
 .card-title {
