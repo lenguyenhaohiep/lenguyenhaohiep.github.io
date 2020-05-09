@@ -142,14 +142,10 @@ Retrieve all oceans
 Solr will return
 ```
 {
-  "responseHeader":{
-    "status":0,
-    "QTime":2,
-    "params":{
-      "q":"-_nest_path_:*",
-      "fl":"_nest_path_,*,[child fl=_nest_path_]",
-      "_":"1589031147359"}},
-  "response":{"numFound":2,"start":0,"docs":[
+  "response":{
+		"numFound":2,
+		"start":0,
+		"docs":[
       {
         "id":"ocean2",
         "doc_type":"ocean",
@@ -157,8 +153,9 @@ Solr will return
         "_root_":"ocean2",
         "_version_":1666219523517186048,
         "fishes":[
-          {
-            "_nest_path_":"/fishes#0"}]},
+          { "_nest_path_":"/fishes#0" }
+				]
+			},
       {
         "id":"ocean1",
         "doc_type":"ocean",
@@ -166,18 +163,17 @@ Solr will return
         "_root_":"ocean1",
         "_version_":1666220098844622848,
         "crabs":[
-          {
-            "_nest_path_":"/crabs#0"},
-
-          {
-            "_nest_path_":"/crabs#1"}],
+          { "_nest_path_":"/crabs#0" },
+          { "_nest_path_":"/crabs#1" }
+				],
         "fishes":[
-          {
-            "_nest_path_":"/fishes#0"},
-
-          {
-            "_nest_path_":"/fishes#1"}]}]
-  }}
+          { "_nest_path_":"/fishes#0" },
+          { "_nest_path_":"/fishes#1" }
+				]
+			}
+		]
+  }
+}
 ```
 So `_nest_path_` will indicate the relationships, and we could see that there is no `_nest_path_` in the parent. The criteria `-_nest_path_:*` is equal to `doc_type:ocean` in this case. `-_nest_path_:*` means there is no `_nest_path_` field.
 
