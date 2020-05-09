@@ -46,7 +46,7 @@ layout: default
       <a href="{{ post.url }}">{{ post.title }}</a>
     </div>
     <div class="card-container">
-      <p class="author">
+      <p class="author" style="text-align:center; color: #828282;">
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         <span class="date">{{ post.date | date: date_format }}</span>
       </p>

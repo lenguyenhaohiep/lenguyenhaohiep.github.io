@@ -42,4 +42,4 @@ Whereas:
 
 **(2)** will exclude test coverage result of components such as modules, classes, inner classes (**method is not supported**) given **their file paths** from the jacoco report.
 
-If you use **(2)** only, you test coverage will not include any result of excluded components in the readable format. However, if you use **(1)** only, your readable report with Jacoco will include coverage result of excluded components, with all 0% for all. So you could define both **(1)** and **(2)** or only **(2)** is enough.
+If you use **(2)** only, your test coverage will not include any result of excluded components in the readable report. However, if you use **(1)** only, your readable report with Jacoco will include coverage result of excluded components, with all 0%. So you could define both **(1)** and **(2)** or only **(2)** is enough.

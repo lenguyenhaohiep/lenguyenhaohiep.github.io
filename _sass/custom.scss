@@ -22,9 +22,15 @@ pre, code{
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   width: 23%;
   float: left;
-  height: 500px;
+  height: 520px;
   margin: 1%;
   border-radius: 5px;
+  @include media-query(1200px) {
+    width: 48%;
+  }
+  @include media-query($on-laptop) {
+    width: 98%;
+  }
 }
 
 .card:hover {
@@ -43,9 +49,11 @@ pre, code{
   min-height: 43px;
   font-weight: bold;
   text-align: center;
+  font-size: 16px;
 }
 .card-footer {
   position: relative;
+  padding-top: 10px;
   bottom: 0;
 }
 
@@ -66,8 +74,22 @@ pre, code{
 .svg-icon {
   width: 30px;
   height: 30px;
+  fill: white;
 }
 
 .svg-link:hover {
   text-decoration: none;
+}
+
+
+.site-nav {
+  @include media-query($on-palm) {
+    color: $text-color;
+    .svg-icon {
+      fill: $text-color !important;
+    }
+    .trigger{
+      padding: 10px;
+    }
+  }
 }
