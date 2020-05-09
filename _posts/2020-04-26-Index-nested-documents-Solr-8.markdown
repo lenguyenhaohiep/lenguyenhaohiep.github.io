@@ -4,6 +4,14 @@ title:  "Index nested documents with Solr 8"
 date:   2020-04-26 10:24:30 -0500
 categories: Solr
 ---
+
+#### Table of contents
+1. [Schema Configuration](#schema-configuration)
+2. [Index nested document](#index-nested-document)
+3. [Query without using nest path](#query-without-using-nest-path)
+4. [Query without using nest path](#query-using-nest-path)
+
+
 This article will show how to configure solr schema and index nested documents.
 
 Nested schema is supported from Solr 8, along with [Rudimentary Root-only Schemas](https://lucene.apache.org/solr/guide/8_0/indexing-nested-documents.html#rudimentary-root-only-schemas). So named relationships are defined between parent and nested documents instead of one keyword `_childDocuments_`. Hence, we could now have multiple relationships.
@@ -19,7 +27,13 @@ Nested schema is supported from Solr 8, along with [Rudimentary Root-only Schema
 #### Index nested document
 Let’s walkthrough an example of Ocean solr collection. There are a lot of species in the ocean such fish, lobster, shrimp, crab.... Of course, you could group all these species and put all of them into one single nested document list in solr but we want to keep data structure cleaner.
 
-This query will index an ocean with 2 species: crab and fishe. Remember that `id` is required for both parent and nested documents.
+This query will index an ocean with 2 species: crab and fishe. Remember that `id` is required for both parent and nested documents. Do not use the same `id` in parent root document and a child document, and do not use the same child document id across relationships. This will violate integrity that solr expects (more details [here](https://lucene.apache.org/solr/guide/8_0/indexing-nested-documents.html#important-maintaining-integrity-with-updates-and-deletes)).
+
+All examples will be POST request to the local solr.
+```
+POST http://localhost:8983/solr/example/update
+```
+
 ```
 [
 	{
