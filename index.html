@@ -55,9 +55,15 @@ layout: default
       </p>
     </div>
     <div class="card-footer">
-      <center>
-        <a href="{{ post.url }}">Read more</a>
-      </center>
+        {% if post %}
+          {% assign categories = post.categories %}
+            Category:
+            {% for category in categories %}
+            <a class="category-tag" href="{{site.baseurl}}/categories/#{{category|slugize}}">{{category}}</a>
+            {% unless forloop.last %}&nbsp;{% endunless %}
+            {% endfor %}
+        {% endif %}
+        <a class="read-more" href="{{ post.url }}">⇨</a>
     </div>
   </div>
 {% endfor %}

@@ -20,7 +20,7 @@ pre, code{
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  width: 23%;
+  width: 31%;
   float: left;
   height: 520px;
   margin: 1%;
@@ -52,9 +52,15 @@ pre, code{
   font-size: 16px;
 }
 .card-footer {
-  position: relative;
-  padding-top: 10px;
-  bottom: 0;
+    position: relative;
+    padding-top: 10px;
+    bottom: 0;
+    padding: 16px;
+}
+
+.read-more {
+  float: right;
+  display: inline-block;
 }
 
 .pagination {
