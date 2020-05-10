@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Use atomic update on nested document with Solr 8"
+title:  "Use atomic update on nested documents with Solr 8"
 date:   2020-04-26 10:24:30 -0500
 categories: Solr
 ---
@@ -14,11 +14,11 @@ categories: Solr
 
 As [atomic update is now supported from Solr 8](https://lucene.apache.org/solr/guide/8_1/updating-parts-of-documents.html), this article will demonstrate how to perform atomic partial update on nested documents.
 
-Let's say that we want to add more fishes into Pacific Ocean (read more [here](https://lenguyenhaohiep.github.io/solr/Index-nested-documents-Solr-8/) to know how to index nested documents).
+Let's say that we want to add more fishes to Pacific Ocean (read more [here](https://lenguyenhaohiep.github.io/solr/Index-nested-documents-Solr-8/) to know how to index nested documents).
 
 #### Add new nested documents
 In order to add, we use partial update with `add` modifier. The `id` parent is always required to perform any action on nested documents.
-Let's add 2 more fishes into the Pacific Ocean with `id=ocean1`.
+Let's add 2 more fishes to the Pacific Ocean with `id=ocean1`.
 ```
 POST http://localhost:8983/solr/example/update
 ```

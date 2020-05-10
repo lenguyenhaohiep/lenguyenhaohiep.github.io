@@ -25,7 +25,7 @@ Nested schema is supported from Solr 8, along with [Rudimentary Root-only Schema
 ```
 
 #### Index nested document
-Let’s walkthrough an example of Ocean solr collection. There are a lot of species in the ocean such fish, lobster, shrimp, crab.... Of course, you could group all these species and put all of them into one single nested document list in solr but we want to keep data structure cleaner.
+Let’s walkthrough an example of Ocean solr collection. There are a lot of species in the ocean such fish, lobster, shrimp, crab.... Of course, you could group all these species and put all of them in one single nested document list in solr but we want to keep data structure cleaner.
 
 This query will index an ocean with 2 species: crab and fishe. Remember that `id` is required for both parent and nested documents. Do not use the same `id` in parent root document and a child document, and do not use the same child document id across relationships. This will violate integrity that solr expects (more details [here](https://lucene.apache.org/solr/guide/8_0/indexing-nested-documents.html#important-maintaining-integrity-with-updates-and-deletes)).
 
@@ -98,7 +98,7 @@ Retrieve names of oceans and types of fishes.
 The rule here is that we have to provide all fields including parent and child fields in `fields` (or `fl`). In the example, `name_str` is both parent and child field, and `type_str` is exclusively a child field.
 Because fishes also have names, so the second `fl` has to be passed in `[child]` function to filter only `type_str` so the query will not return `name_str` of nested document. There is a limit here is that we could not return only child field if parent uses this field as well. It's to say that we could not return `name_str` of fishes but hide the one of `ocean` parent.
 
-There is a trick to do that by putting more metadata on fields and query with wildcards.
+There is a trick to do that by putting more metadata in field names and query with wildcards.
 So, let index the second ocean
 ```
 [

@@ -17,7 +17,7 @@ This article will show you how to build solr queries which perform search and fa
 Let’s walkthrough an example of [Ocean solr collection](https://lenguyenhaohiep.github.io/solr/Index-nested-documents-Solr-8/)). There are some fishes and crabs in the Pacific Ocean.
 
 #### Search parents with children filtering
-Find all oceans which have Clown Fishes.
+Find all oceans where Clown Fishes live.
 ```
 POST http://localhost:8983/solr/example/select
 ```
@@ -48,7 +48,7 @@ POST http://localhost:8983/solr/example/select
 	"fields": "*,[child]"
 }
 ```
-We could combine normal parent query with [block join query parser]( https://lucene.apache.org/solr/guide/8_0/other-parsers.html#block-join-query-parsers) with `!parent` function. It's recommended that we should use brackets to avoid misunderstanding. So if we inverse the condition, `{!parent which=doc_type:ocean}name_str:Nemo AND name_str:Pacific`, without brackets, Solr will understand that `name_str:Pacific` is also a condition on nested documents.
+We could combine normal parent query with [block join query parser]( https://lucene.apache.org/solr/guide/8_0/other-parsers.html#block-join-query-parsers) provided by `!parent` function. It's recommended that we should use brackets to avoid misunderstanding. So if we inverse the condition, `{!parent which=doc_type:ocean}name_str:Nemo AND name_str:Pacific`, without brackets, Solr will understand that `name_str:Pacific` is also a condition on nested documents.
 
 #### Faceting on nested documents
 Facet all types of crabs and fishes in Pacific Ocean.
@@ -119,7 +119,7 @@ Solr will return
   }
 }
 ```
-Facet computation operates on a `domain` which is the result of main query. In this example, the main query will produce an original domain for parent which does not include nested documents. As we could see that, there is a `domain` option added in the query. This is called (block join domain change)[https://lucene.apache.org/solr/guide/8_0/json-faceting-domain-changes.html#block-join-domain-changes]. This option will include nested document into the original domain.
+Facet computation operates on a `domain` which is the result of main query. In this example, the main query will define an original domain for parent which does not include nested documents. As we could see that, there is a `domain` option added to the query. This is called (block join domain change)[https://lucene.apache.org/solr/guide/8_0/json-faceting-domain-changes.html#block-join-domain-changes]. This option will include nested documents into the original domain.
 ```
 "domain": {
   "blockChildren": "doc_type:ocean",
@@ -127,7 +127,7 @@ Facet computation operates on a `domain` which is the result of main query. In t
 }
 ```
 
-Whereas `blockChildren` indicates the condition to match all parents containing the nested documents. It means match all parents with `doc_type=ocean`. However, there are 2 types (crabs and fishes), so `filter` will narrow down the result set to have only fishes before faceting.
+Whereas `blockChildren` indicates the condition to match all parents consisting of the nested documents. It means matching all parents with `doc_type=ocean`. However, there are 2 types (crabs and fishes), so `filter` will narrow down the result set to have only fishes before faceting.
 
 #### Faceting on nested documents and parent together
 Facet ocean names along with facets on fish and crab types.
@@ -162,14 +162,14 @@ Facet ocean names along with facets on fish and crab types.
   }
 }
 ```
-Again the `domain` option is used for `ocean_names` facet, it's very important to indicate this option to avoid name conflict. It's when the parent and nested documents use same fields, in this case is `name_str`.
+Again the `domain` option is used for `ocean_names` facet, it's very important to indicate this option to avoid name conflict. Especially when the parent and nested documents use same fields which is `name_str` in this case.
 ```
 "domain": {
   "blockParent": "doc_type:ocean"
 }
 ```
 Whereas `blockParent` indicates the condition that matches parent documents. Remember that `blockParent` or `blockChildren` are conditions on parent documents. They work as similarly as block join query parsers `{!parent which=<allParents>}` and `{!child of=<allParents>}` respectively.
-If `domain` is not added in `ocean_names` facet, the result will contain all facet counts of fishes and crabs.
+If `domain` is not added to `ocean_names` facet, the result will contain all facet counts of fishes and crabs.
 
 #### Faceting and Excluding
 Facet all types of fishes in Pacific Ocean with excluding filters which are Clown Fish and Pacific Ocean.
@@ -202,4 +202,4 @@ Facet all types of fishes in Pacific Ocean with excluding filters which are Clow
   }
 }
 ```
-The `excludeTags` is used to exclude filters from facets. Unlike normal documents without nested documents where only filters related to the facet field have to be excluded ([more details](https://lucene.apache.org/solr/guide/8_2/faceting.html#tagging-and-excluding-filters)), here we have to exclude also `fish_type` tag from `ocean_names` facet. It's because the parent condition will give the same partial result as done by the children condition. In this example, Pacific Ocean contains Clown Fish, so Clown Fish is filtered out if it's not excluded in `fish_types` facet. The same, `!parent` function will find Pacific Ocean which is also filtered out if it's not excluded from `ocean_names` facet.
+The `excludeTags` is used to exclude filters from facets. Unlike normal documents without nested documents where only filters related to the facet field have to be excluded ([more details](https://lucene.apache.org/solr/guide/8_2/faceting.html#tagging-and-excluding-filters)), here we have to exclude also `fish_type` tag from `ocean_names` facet. It's because the parent condition will give the same partial result as done by the children condition. In this example, Pacific Ocean (`!tag=ocean_name`) contains Clown Fish, so Clown Fish is filtered out if it's not excluded in `fish_types` facet. The same, `!parent` function will find Pacific Ocean (`!tag=fish_type`) which is also filtered out if it's not excluded from `ocean_names` facet.
