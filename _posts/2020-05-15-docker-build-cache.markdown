@@ -24,7 +24,7 @@ Dockerfile
 FROM image:latest
 COPY . /workspace // --> BAD
 ```
-Every modification will lead to rebuild the whole image because docker detects changes in the root working directory even on the fields that are not related to the projects.
+Every modification will lead to rebuild the whole image because docker detects changes in the root working directory even on the files that are not related to the projects.
 ```
 FROM image:latest
 COPY /src /workspace/src // --> GOOD
@@ -48,7 +48,7 @@ Dockerfile
 FROM image:latest
 COPY /src /workspace/src
 ```
-If we put Dockerfile in the same workspace, and then we copy the whole workspace into Dockerfile. So, when we want to modify a line or even add a comment in the Dockerfile. This action will trigger docker not to use cache anymore because it detects changes.
+If we put Dockerfile in the same workspace, and then we copy the whole workspace into Dockerfile. So, when we want to modify a line or even add a comment in the Dockerfile, this action will trigger docker not to use cache anymore because it detects changes.
 
 ####  Do not respect stage dependency
 ```
@@ -66,7 +66,7 @@ COPY --from=stage3 /home/file.txt /target
 ```
 If the objective is just to build only one final image, there is no problem because docker will handle by itself. Docker will use caches from each stage to optimize image building. Remember that for each stage, we should avoid cases that trigger docker to rebuild everything (as described in [**1**](#copy-everything-into-docker-container-workspace) and [**2**](#put-dockerfile-in-the-same-project-directory)).
 
-If we want to build both 3 images for the purpose of reuse.
+If we want to build both 3 images to reuse.
 ```
 docker build -t stage1_img --target=stage1 .
 docker build -t stage2_img --target=stage2 --cache-from=stage1_img .
