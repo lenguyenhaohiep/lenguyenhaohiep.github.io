@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Some reasons why docker build does not use cache.
+title: Some reasons why docker build does not use cache
 date: 2020-05-13 00:00:00
 categories: Docker
 ---
