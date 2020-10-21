@@ -9,7 +9,7 @@ categories: Solr
 1. [Schema Configuration](#schema-configuration)
 2. [Index nested document](#index-nested-document)
 3. [Query without using nest path](#query-without-using-nest-path)
-4. [Query without using nest path](#query-using-nest-path)
+4. [Query using nest path](#query-using-nest-path)
 
 
 This article will show how to configure solr schema and index nested documents.
@@ -117,7 +117,7 @@ So, let index the second ocean
 	}
 ]
 ```
-Retrieve names of fishes from the ocean withh `id=ocean2.
+Retrieve names of fishes from the ocean withh `id=ocean2`.
 ```
 {
 	"query": "doc_type:ocean AND id:ocean2",
