@@ -127,7 +127,7 @@ Facet computation operates on a `domain` which is the result of main query. In t
 }
 ```
 
-Whereas `blockChildren` indicates the condition to match all parents consisting of the nested documents. It means matching all parents with `doc_type=ocean`. However, there are 2 types (crabs and fishes), so `filter` will narrow down the result set to have only fishes before faceting.
+Whereas `blockChildren` indicates the condition to match all the nested documents who belong to a parent condition. It means matching all nested documents whose parent is  `doc_type=ocean`. However, there are 2 types (crabs and fishes), so `filter` will narrow down the result set to have only fishes before faceting.
 
 #### Faceting on nested documents and parent together
 Facet ocean names along with facets on fish and crab types.
