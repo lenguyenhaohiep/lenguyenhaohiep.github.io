@@ -1,0 +1,74 @@
+---
+layout: default
+permalink: /categories/
+title: Categories
+---
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<div class="col">
+  <figure class="highcharts-figure">
+      <div id="category-container"></div>
+  </figure>
+  <center class="highcharts-description">
+    Click on each category to focus on its posts.
+  </center>
+</div>
+
+<div class="col">
+{% for category in site.categories %}
+ <div class="archive-group">
+   {% capture category_name %}{{ category | first }}{% endcapture %}
+   <div id="#{{ category_name | slugize }}"></div>
+   <p></p>
+
+   <h3 class="category-head">{{ category_name }} ({{ site.categories[category_name] | size }})</h3>
+   <a name="{{ category_name | slugize }}"></a>
+   {% for post in site.categories[category_name] %}
+   {%- assign date_format = site.minima.date_format | default: "%Y" -%}
+   <article class="archive-item">
+     <h4>{{ post.date | date: date_format}} <a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a></h4>
+   </article>
+   {% endfor %}
+ </div>
+{% endfor %}
+</div>
+
+
+<script type="text/javascript">
+  var data = [];
+  {% for category in site.categories %}
+     {% capture category_name %}{{ category | first }}{% endcapture %}
+     data.push({
+       name: "{{ category_name | strip }}",
+       weight: {{ site.categories[category_name] | size }},
+     });
+  {% endfor %}
+
+  Highcharts.chart('category-container', {
+      plotOptions: {
+          series: {
+              cursor: 'pointer',
+              point: {
+                  events: {
+                      click: function (event) {
+                        document.getElementById("#"+event.point.name).scrollIntoView()
+                      }
+                  }
+              }
+          }
+      },
+      series: [{
+          type: 'wordcloud',
+          data: data,
+          name: '#posts'
+      }],
+      title: {
+          text: 'Post Categories'
+      }
+  });
+</script>
